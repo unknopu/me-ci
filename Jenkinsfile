@@ -10,6 +10,7 @@ pipeline {
             stage('Build') {
                   steps {
                         echo 'Building Sample Maven Project'
+                        sh 'mvn -f clean package'
                   }
             }
             stage('Deploy') {
