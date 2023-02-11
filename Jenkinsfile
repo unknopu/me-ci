@@ -41,7 +41,7 @@ pipeline {
                                     -Dsonar.projectName=simpleMavenJenkins \
                                     -Dsonar.projectVersion=1.0 \
                                     -Dsonar.sources=src/ \
-                                    -Dsonar.java.binaries=**/**.java'''
+                                    -Dsonar.java.binaries=**/*.java'''
                               }
                               timeout(time: 10, unit: 'MINUTES') {
                                     waitForQualityGate abortPipeline: true
