@@ -31,21 +31,20 @@ pipeline {
             //       }
             // }
             stage('CODE ANALYSIS with SONARQUBE') {
-                        environment {
-                              scannerHome = tool 'mySonarScanner'
+                  environment {
+                        scannerHome = tool 'mySonarScanner'
+                  }
+                  steps {
+                        withSonarQubeEnv('LocalSonarServer') {
+                        sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testMaven \
+                              -Dsonar.projectName=testMaven \
+                              -Dsonar.projectVersion=1.0 \
+                              -Dsonar.sources=maven-samples/single-module/'''
                         }
-                        steps {
-                              withSonarQubeEnv('LocalSonarServer') {
-                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testMaven \
-                                    -Dsonar.projectVersion=1.0 \
-                                    -Dsonar.sources=. \
-                                    -Dsonar.jacoco.reportsPath=target/jacoco.exec \
-                                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
-                              }
-                              timeout(time: 10, unit: 'MINUTES') {
-                                    waitForQualityGate abortPipeline: true
-                              }
+                        timeout(time: 10, unit: 'MINUTES') {
+                              waitForQualityGate abortPipeline: true
                         }
+                  }
             }
       }
 }
