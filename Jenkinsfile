@@ -37,9 +37,8 @@ pipeline {
                         steps {
                               withSonarQubeEnv('LocalSonarServer') {
                               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testMaven \
-                                    -Dsonar.projectName=testMaven \
                                     -Dsonar.projectVersion=1.0 \
-                                    -Dsonar.sources=maven-samples/single-module/ \
+                                    -Dsonar.sources=. \
                                     -Dsonar.jacoco.reportsPath=target/jacoco.exec \
                                     -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
                               }
