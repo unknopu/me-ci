@@ -36,11 +36,11 @@ pipeline {
                         }
                         steps {
                               withSonarQubeEnv('LocalSonarServer') {
-                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testMaven \
+                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMavenJenkins \
+                                    -Dsonar.projectName=simpleMavenJenkins \
                                     -Dsonar.projectVersion=1.0 \
-                                    -Dsonar.sources=maven-samples/single-module/ \
-                                    -Dsonar.java.binaries=. \
-                                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+                                    -Dsonar.sources=src/ \
+                                    -Dsonar.java.binaries=**/**.java \
                               }
                               timeout(time: 10, unit: 'MINUTES') {
                                     waitForQualityGate abortPipeline: true
