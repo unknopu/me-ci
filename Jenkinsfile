@@ -10,7 +10,7 @@ pipeline {
             stage('Build') {
                   steps {
                         echo 'Building Sample Maven Project'
-                        sh 'mvn -f maven-samples/single-module/pom.xml clean package'
+                        sh 'mvn -f clean package'
                   }
                   post {
                         success {
