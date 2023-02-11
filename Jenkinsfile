@@ -19,34 +19,34 @@ pipeline {
                         }
                   }
             }
-            stage('SonarQube analysis') {
-                  environment {
-                        scannerHome = tool 'mySonarScanner'
-                  }
-                  // If you have configured more than one global server connection, you can specify its name
-                  steps {
-                        withSonarQubeEnv('LocalSonarServer') { 
-                              sh "${scannerHome}/bin/sonar-scanner"
-                        }
-                  }
-            }
-            // stage('CODE ANALYSIS with SONARQUBE') {
-            //             environment {
-            //                   scannerHome = tool 'mySonarScanner'
+            // stage('SonarQube analysis') {
+            //       environment {
+            //             scannerHome = tool 'mySonarScanner'
+            //       }
+            //       // If you have configured more than one global server connection, you can specify its name
+            //       steps {
+            //             withSonarQubeEnv('LocalSonarServer') { 
+            //                   sh "${scannerHome}/bin/sonar-scanner"
             //             }
-            //             steps {
-            //                   withSonarQubeEnv('sonar-pro') {
-            //                   sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testMaven \
-            //                         -Dsonar.projectName=A Single Maven Module \
-            //                         -Dsonar.projectVersion=1.0 \
-            //                         -Dsonar.sources=maven-samples/single-module/ \
-            //                         -Dsonar.jacoco.reportsPath=target/jacoco.exec \
-            //                         -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
-            //                   }
-            //                   timeout(time: 10, unit: 'MINUTES') {
-            //                         waitForQualityGate abortPipeline: true
-            //                   }
-            //             }
+            //       }
             // }
+            stage('CODE ANALYSIS with SONARQUBE') {
+                        environment {
+                              scannerHome = tool 'mySonarScanner'
+                        }
+                        steps {
+                              withSonarQubeEnv('LocalSonarServer') {
+                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testMaven \
+                                    -Dsonar.projectName=A Single Maven Module \
+                                    -Dsonar.projectVersion=1.0 \
+                                    -Dsonar.sources=maven-samples/single-module/ \
+                                    -Dsonar.jacoco.reportsPath=target/jacoco.exec \
+                                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+                              }
+                              timeout(time: 10, unit: 'MINUTES') {
+                                    waitForQualityGate abortPipeline: true
+                              }
+                        }
+            }
       }
 }
