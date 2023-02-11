@@ -13,12 +13,12 @@ pipeline {
                         sh 'mvn -f pom.xml clean package'
                         sh 'ls -lathr'
                   }
-                  // post {
-                  //       success {
-                  //             echo "Now Archiving the Artifacts...."
-                  //             archiveArtifacts artifacts: '**/**.war'
-                  //       }
-                  // }
+                  post {
+                        success {
+                              echo "Now Archiving the Artifacts...."
+                              archiveArtifacts artifacts: '**/**.jar'
+                        }
+                  }
             }
             // stage('SonarQube analysis') {
             //       environment {
