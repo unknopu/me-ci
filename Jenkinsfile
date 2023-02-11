@@ -25,7 +25,7 @@ pipeline {
                   }
                   // If you have configured more than one global server connection, you can specify its name
                   steps {
-                        withSonarQubeEnv('My SonarQube Server') { 
+                        withSonarQubeEnv('LocalSonarServer') { 
                               sh "${scannerHome}/bin/sonar-scanner"
                         }
                   }
