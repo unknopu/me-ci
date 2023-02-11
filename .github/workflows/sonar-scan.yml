@@ -1,0 +1,35 @@
+---
+name: 01 Basic Dcoker Build
+
+env:
+  # GKE_CLUSTER: iconica  
+  # GKE_ZONE: asia-southeast1-a	 
+  DEPLOYMENT_NAME: simplemaven
+  SONAR_PROJECT_KEY: testapi
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "develop" ]
+  
+jobs:
+  sonarqube-scan:
+    name: SonarQube to detects code smells
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        # projectKey: testapi
+        # exclusions: script
+        # projectBaseDir: .
+        # args: >
+        #   -Dsonar.verbose=true
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@master
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  
