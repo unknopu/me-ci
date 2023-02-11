@@ -36,7 +36,7 @@ pipeline {
                   }
                   steps {
                         withSonarQubeEnv('LocalSonarServer') {
-                        sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testMaven \
+                        sh '''${scannerHome**}**}/bin/sonar-scanner -Dsonar.projectKey=testMaven \
                               -Dsonar.projectName=testMaven \
                               -Dsonar.projectVersion=1.0 \
                               -Dsonar.sources=maven-samples/single-module/'''
