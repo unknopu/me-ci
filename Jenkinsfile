@@ -37,7 +37,7 @@ pipeline {
                         steps {
                               withSonarQubeEnv('LocalSonarServer') {
                               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=testMaven \
-                                    -Dsonar.projectName=A Single Maven Module \
+                                    -Dsonar.projectName=testMaven \
                                     -Dsonar.projectVersion=1.0 \
                                     -Dsonar.sources=maven-samples/single-module/ \
                                     -Dsonar.jacoco.reportsPath=target/jacoco.exec \
