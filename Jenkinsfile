@@ -36,7 +36,7 @@ pipeline {
                         scannerHome = tool 'mySonarScanner'
                   }
                   steps {
-                        withSonarQubeEnv(credentialsId: 'sqa_4175ed933fe7e354fbbba6e0eeca4df104a32b93', installationName: 'LocalSonarServer') {
+                        withSonarQubeEnv(credentialsId: 'sonarToken', installationName: 'LocalSonarServer') {
                               sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
                               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
                                     -Dsonar.projectName=simpleMaven \
