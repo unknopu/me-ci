@@ -40,7 +40,7 @@ pipeline {
                               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
                                     -Dsonar.projectName=simpleMaven \
                                     -Dsonar.projectVersion=1.0 \
-                                    -Dsonar.sources=src/ \
+                                    -Dsonar.scanAllFiles=true \
                                     -Dsonar.java.binaries=**/*.java'''
                               }
                               timeout(time: 10, unit: 'MINUTES') {
