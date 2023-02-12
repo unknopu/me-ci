@@ -37,8 +37,8 @@ pipeline {
                         }
                         steps {
                               withSonarQubeEnv('LocalSonarServer') {
-                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMavenJenkins \
-                                    -Dsonar.projectName=simpleMavenJenkins \
+                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
+                                    -Dsonar.projectName=simpleMaven \
                                     -Dsonar.projectVersion=1.0 \
                                     -Dsonar.sources=src/ \
                                     -Dsonar.java.binaries=**/*.java'''
