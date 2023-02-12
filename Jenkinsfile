@@ -36,16 +36,15 @@ pipeline {
                         scannerHome = tool 'mySonarScanner'
                   }
                   steps {
-                        withSonarQubeEnv(installationName: 'LocalSonarServer') {
-                              sh "mvn -B clean deploy sonar:sonar"
-                              // sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
-                              //       -Dsonar.projectName=simpleMaven \
-                              //       -Dsonar.projectVersion=1.0 \
-                              //       -Dsonar.scanAllFiles=true'''
-                              timeout(time: 10, unit: 'MINUTES') {
-                                    waitForQualityGate abortPipeline: true
-                              }
-                        }
+                        // withSonarQubeEnv(installationName: 'LocalSonarServer') {
+                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
+                                    -Dsonar.projectName=simpleMaven \
+                                    -Dsonar.projectVersion=1.0 \
+                                    -Dsonar.scanAllFiles=true'''
+                              // timeout(time: 10, unit: 'MINUTES') {
+                              //       waitForQualityGate abortPipeline: true
+                              // }
+                        // }
                   }
             }
       }
