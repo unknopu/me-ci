@@ -39,8 +39,6 @@ pipeline {
                         withSonarQubeEnv('LocalSonarServer') {
                               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
                                     -Dsonar.projectName=simpleMaven \
-                                    -Dsonar.host.url=http://3.111.25.69:9000 \
-                                    -Dsonar.login=sqa_4175ed933fe7e354fbbba6e0eeca4df104a32b93 \
                                     -Dsonar.projectVersion=1.0 \
                                     -Dsonar.scanAllFiles=true'''
                               timeout(time: 10, unit: 'MINUTES') {
@@ -51,3 +49,5 @@ pipeline {
             }
       }
 }
+                                    // -Dsonar.host.url=http://3.111.25.69:9000 \
+                                    // -Dsonar.login=sqa_4175ed933fe7e354fbbba6e0eeca4df104a32b93 \
