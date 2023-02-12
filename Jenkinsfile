@@ -32,11 +32,11 @@ pipeline {
             //       }
             // }
             stage('CODE ANALYSIS with SONARQUBE') {
-                        environment {
-                              scannerHome = tool 'mySonarScanner'
-                        }
-                        steps {
-                              withSonarQubeEnv('LocalSonarServer') {
+                  environment {
+                        scannerHome = tool 'mySonarScanner'
+                  }
+                  steps {
+                        withSonarQubeEnv('LocalSonarServer') {
                               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
                                     -Dsonar.projectName=simpleMaven \
                                     -Dsonar.host.url=http://3.111.25.69:9000 \
@@ -46,8 +46,8 @@ pipeline {
                               timeout(time: 10, unit: 'MINUTES') {
                                     waitForQualityGate abortPipeline: true
                               }
-                              }
                         }
+                  }
             }
       }
 }
