@@ -36,7 +36,7 @@ pipeline {
                         scannerHome = tool 'mySonarScanner'
                   }
                   steps {
-                        withSonarQubeEnv('LocalSonarServer') {
+                        withSonarQubeEnv(installationName: 'LocalSonarServer') {
                               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
                                     -Dsonar.projectName=simpleMaven \
                                     -Dsonar.projectVersion=1.0 \
