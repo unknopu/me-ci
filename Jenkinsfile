@@ -20,28 +20,16 @@ pipeline {
                         }
                   }
             }
-            // stage('SonarQube analysis') {
-            //       environment {
-            //             scannerHome = tool 'mySonarScanner'
-            //       }
-            //       // If you have configured more than one global server connection, you can specify its name
-            //       steps {
-            //             withSonarQubeEnv('LocalSonarServer') { 
-            //                   sh "${scannerHome}/bin/sonar-scanner"
-            //             }
-            //       }
-            // }
             stage('CODE ANALYSIS with SONARQUBE') {
                   environment {
                         scannerHome = tool 'mySonarScanner'
                   }
                   steps {
                         withSonarQubeEnv(installationName: 'LocalSonarServer') {
-                              sh "${scannerHome}/bin/sonar-scanner"
-                              // sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
-                              //       -Dsonar.projectName=simpleMaven \
-                              //       -Dsonar.projectVersion=1.0 \
-                              //       -Dsonar.scanAllFiles=true'''
+                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
+                                    -Dsonar.projectName=simpleMaven \
+                                    -Dsonar.projectVersion=1.0 \
+                                    -Dsonar.scanAllFiles=true'''
                               timeout(time: 10, unit: 'MINUTES') {
                                     waitForQualityGate abortPipeline: true
                               }
