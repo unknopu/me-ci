@@ -7,7 +7,7 @@ pipeline {
                   }
                   steps {
                         withSonarQubeEnv('LocalSonarServer') {
-                              sh 'sonar-scanner'
+                              sh '${scannerHome}/bin/sonar-scanner'
                         }
                   }
             }
