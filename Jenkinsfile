@@ -3,7 +3,7 @@ pipeline {
       stages {
             stage('SonarQube analysis') {
                   tools {
-                        sonarQube 'mySonarScanner'
+                        def scannerHome = tool 'mySonarScanner';
                   }
                   steps {
                         withSonarQubeEnv('LocalSonarServer') {
