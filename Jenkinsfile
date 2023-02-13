@@ -2,7 +2,7 @@ pipeline {
       agent any
       stages {
             stage('SonarQube analysis') {
-                  tools {
+                  environment {
                         def scannerHome = tool 'mySonarScanner';
                   }
                   steps {
@@ -37,18 +37,6 @@ pipeline {
 //                   }
 //             }
 //             stages('CODE ANALYSIS with SONARQUBE') {
-//                   stage('SonarQube analysis') {
-//                         steps {
-//                               script {
-//                                     // requires SonarQube Scanner 2.8+
-//                                     scannerHome = tool 'mySonarScanner'
-//                               }
-//                               withSonarQubeEnv('LocalSonarServer') {
-//                                     sh "${scannerHome}/bin/sonar-scanner"
-//                               }
-//                         }
-//                   }
-
 //                   // environment {
 //                   //       def scannerHome = tool 'mySonarScanner';
 //                   // }
