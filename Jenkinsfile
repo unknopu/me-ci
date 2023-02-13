@@ -40,7 +40,7 @@ pipeline {
                         }
                   }
             }
-            stages('CODE ANALYSIS with SONARQUBE') {
+            stage('CODE ANALYSIS with SONARQUBE') {
                   environment {
                         def scannerHome = tool 'mySonarScanner';
                   }
