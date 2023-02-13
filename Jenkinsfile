@@ -22,10 +22,10 @@ pipeline {
             }
             stage('CODE ANALYSIS with SONARQUBE') {
                   environment {
-                        scannerHome = tool 'mySonarScanner'
+                        def scannerHome = tool 'mySonarScanner';
                   }
                   steps {
-                        withSonarQubeEnv(installationName: 'mySonarScanner') {
+                        withSonarQubeEnv('LocalSonarServer') {
                               sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
                                     -Dsonar.projectName=simpleMaven \
                                     -Dsonar.projectVersion=1.0 \
