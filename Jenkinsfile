@@ -20,7 +20,7 @@ pipeline {
                         }
                   }
             }
-            stage('CODE ANALYSIS with SONARQUBE') {
+            stages('CODE ANALYSIS with SONARQUBE') {
                   stage('SonarQube analysis') {
                         steps {
                               script {
