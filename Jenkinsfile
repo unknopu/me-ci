@@ -21,20 +21,32 @@ pipeline {
                   }
             }
             stage('CODE ANALYSIS with SONARQUBE') {
-                  environment {
-                        def scannerHome = tool 'mySonarScanner';
-                  }
-                  steps {
-                        withSonarQubeEnv('LocalSonarServer') {
-                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
-                                    -Dsonar.projectName=simpleMaven \
-                                    -Dsonar.projectVersion=1.0 \
-                                    -Dsonar.scanAllFiles=true'''
-                              timeout(time: 10, unit: 'MINUTES') {
-                                    waitForQualityGate abortPipeline: true
+                  stage('SonarQube analysis') {
+                        steps {
+                              script {
+                                    // requires SonarQube Scanner 2.8+
+                                    scannerHome = tool 'mySonarScanner'
+                              }
+                              withSonarQubeEnv('LocalSonarServer') {
+                                    sh "${scannerHome}/bin/sonar-scanner"
                               }
                         }
                   }
+
+                  // environment {
+                  //       def scannerHome = tool 'mySonarScanner';
+                  // }
+                  // steps {
+                  //       withSonarQubeEnv('LocalSonarServer') {
+                  //             sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
+                  //                   -Dsonar.projectName=simpleMaven \
+                  //                   -Dsonar.projectVersion=1.0 \
+                  //                   -Dsonar.scanAllFiles=true'''
+                  //             timeout(time: 10, unit: 'MINUTES') {
+                  //                   waitForQualityGate abortPipeline: true
+                  //             }
+                  //       }
+                  // }
             }
       }
 }
