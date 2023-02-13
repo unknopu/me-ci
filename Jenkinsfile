@@ -7,7 +7,11 @@ pipeline {
                   }
                   steps {
                         withSonarQubeEnv('LocalSonarServer') {
-                              sh '${scannerHome}/bin/sonar-scanner'
+                              // sh '${scannerHome}/bin/sonar-scanner'
+                              sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=simpleMaven \
+                                    -Dsonar.projectName=simpleMaven \
+                                    -Dsonar.projectVersion=1.0 \
+                                    -Dsonar.scanAllFiles=true'''
                         }
                   }
             }
